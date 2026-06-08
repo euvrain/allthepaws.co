@@ -1,0 +1,660 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>All The Paws — Premium Pet Services</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --cream: #FAF7F2;
+    --warm-white: #FFFCF8;
+    --bark: #3D2B1A;
+    --bark-mid: #6B4C35;
+    --bark-light: #A67C5B;
+    --sage: #7A8C6E;
+    --sage-light: #B8C9AC;
+    --sage-pale: #EEF3EB;
+    --blush: #E8C4AC;
+    --blush-pale: #FAF0E9;
+    --gold: #C8954A;
+    --gold-pale: #FBF3E8;
+    --text: #2A1E14;
+    --muted: #7A6A5C;
+    --border: rgba(61,43,26,0.12);
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--cream);
+    color: var(--text);
+    font-size: 16px;
+    line-height: 1.7;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1.25rem 4vw;
+    background: rgba(250,247,242,0.92);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .nav-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.35rem;
+    font-style: italic;
+    color: var(--bark);
+    text-decoration: none;
+    letter-spacing: 0.01em;
+  }
+  .nav-logo span { color: var(--gold); font-style: normal; }
+
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a {
+    text-decoration: none; color: var(--muted); font-size: 0.875rem;
+    font-weight: 500; letter-spacing: 0.03em;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--bark); }
+
+  .nav-cta {
+    background: var(--bark); color: var(--cream) !important;
+    padding: 0.5rem 1.25rem; border-radius: 2rem;
+    transition: background 0.2s !important;
+  }
+  .nav-cta:hover { background: var(--bark-mid) !important; }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    display: grid; grid-template-columns: 1fr 1fr;
+    align-items: center;
+    padding: 8rem 4vw 4rem;
+    gap: 4rem;
+    background: var(--warm-white);
+    position: relative; overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute; bottom: -80px; right: -80px;
+    width: 500px; height: 500px;
+    background: radial-gradient(circle, var(--sage-pale) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .hero-eyebrow {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    font-size: 0.75rem; font-weight: 500; letter-spacing: 0.12em;
+    text-transform: uppercase; color: var(--gold);
+    background: var(--gold-pale); padding: 0.35rem 0.9rem;
+    border-radius: 2rem; border: 1px solid var(--blush);
+    margin-bottom: 1.25rem;
+  }
+
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.8rem, 5vw, 4.5rem);
+    font-weight: 700; line-height: 1.1;
+    color: var(--bark);
+    margin-bottom: 1.5rem;
+  }
+
+  .hero h1 em {
+    font-style: italic; color: var(--gold);
+  }
+
+  .hero-desc {
+    font-size: 1.1rem; color: var(--muted);
+    max-width: 480px; margin-bottom: 2.5rem;
+    font-weight: 300;
+  }
+
+  .hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; }
+
+  .btn-primary {
+    display: inline-block;
+    background: var(--bark);
+    color: var(--cream);
+    padding: 0.85rem 2rem; border-radius: 2rem;
+    text-decoration: none; font-weight: 500; font-size: 0.95rem;
+    letter-spacing: 0.02em;
+    transition: transform 0.2s, background 0.2s;
+  }
+  .btn-primary:hover { background: var(--bark-mid); transform: translateY(-2px); }
+
+  .btn-ghost {
+    display: inline-block;
+    color: var(--bark); border: 1.5px solid var(--bark);
+    padding: 0.85rem 2rem; border-radius: 2rem;
+    text-decoration: none; font-weight: 500; font-size: 0.95rem;
+    letter-spacing: 0.02em;
+    transition: transform 0.2s, background 0.2s, color 0.2s;
+  }
+  .btn-ghost:hover { background: var(--bark); color: var(--cream); transform: translateY(-2px); }
+
+  .hero-visual {
+    position: relative; display: flex; justify-content: center; align-items: center;
+  }
+
+  .hero-blob {
+    width: 420px; height: 420px;
+    background: var(--sage-pale);
+    border-radius: 60% 40% 70% 30% / 50% 60% 40% 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 9rem;
+    animation: morph 8s ease-in-out infinite;
+    position: relative;
+  }
+
+  @keyframes morph {
+    0%, 100% { border-radius: 60% 40% 70% 30% / 50% 60% 40% 50%; }
+    33% { border-radius: 40% 60% 30% 70% / 60% 40% 50% 50%; }
+    66% { border-radius: 70% 30% 50% 50% / 40% 60% 60% 40%; }
+  }
+
+  .hero-badge {
+    position: absolute; bottom: 30px; right: -10px;
+    background: white; border-radius: 1rem;
+    padding: 0.75rem 1.25rem;
+    box-shadow: 0 8px 32px rgba(61,43,26,0.12);
+    display: flex; align-items: center; gap: 0.75rem;
+    font-size: 0.85rem;
+  }
+  .badge-icon { font-size: 1.5rem; }
+  .badge-text strong { display: block; font-weight: 600; color: var(--bark); }
+  .badge-text span { color: var(--muted); font-size: 0.78rem; }
+
+  .hero-badge2 {
+    position: absolute; top: 30px; left: -10px;
+    background: var(--gold-pale); border-radius: 1rem;
+    border: 1px solid var(--blush);
+    padding: 0.75rem 1.25rem;
+    font-size: 0.85rem;
+    display: flex; align-items: center; gap: 0.5rem;
+  }
+
+  /* ── SERVICES ── */
+  #services {
+    padding: 6rem 4vw;
+    background: var(--cream);
+  }
+
+  .section-header {
+    text-align: center; margin-bottom: 3.5rem;
+  }
+
+  .section-tag {
+    display: inline-block;
+    font-size: 0.7rem; font-weight: 500; letter-spacing: 0.14em;
+    text-transform: uppercase; color: var(--sage);
+    margin-bottom: 1rem;
+  }
+
+  .section-header h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 3.5vw, 2.8rem);
+    font-weight: 700; color: var(--bark);
+    line-height: 1.15;
+  }
+
+  .section-header h2 em { font-style: italic; color: var(--bark-light); }
+
+  .section-header p {
+    color: var(--muted); font-size: 1.05rem; max-width: 520px;
+    margin: 1rem auto 0; font-weight: 300;
+  }
+
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1.5rem;
+    max-width: 1100px; margin: 0 auto;
+  }
+
+  .service-card {
+    background: var(--warm-white);
+    border-radius: 1.5rem;
+    padding: 2rem;
+    border: 1px solid var(--border);
+    transition: transform 0.25s, box-shadow 0.25s;
+    position: relative; overflow: hidden;
+  }
+
+  .service-card::after {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0; height: 3px;
+    background: var(--sage-light);
+    transform: scaleX(0); transform-origin: left;
+    transition: transform 0.3s;
+  }
+
+  .service-card:hover { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(61,43,26,0.1); }
+  .service-card:hover::after { transform: scaleX(1); }
+
+  .service-emoji { font-size: 2.5rem; margin-bottom: 1rem; display: block; }
+
+  .service-card h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.25rem; font-weight: 700;
+    color: var(--bark); margin-bottom: 0.5rem;
+  }
+
+  .service-card p { color: var(--muted); font-size: 0.9rem; font-weight: 300; }
+
+  .service-price {
+    display: inline-block;
+    margin-top: 1.25rem;
+    font-size: 0.8rem; font-weight: 500;
+    color: var(--gold);
+    background: var(--gold-pale);
+    padding: 0.3rem 0.75rem; border-radius: 2rem;
+    border: 1px solid var(--blush);
+  }
+
+  /* ── WHY US ── */
+  #about {
+    padding: 6rem 4vw;
+    background: var(--bark);
+    color: var(--cream);
+    position: relative; overflow: hidden;
+  }
+
+  #about::before {
+    content: '';
+    position: absolute; top: -100px; right: -100px;
+    width: 400px; height: 400px;
+    background: radial-gradient(circle, rgba(200,149,74,0.15) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  #about .section-tag { color: var(--gold); }
+  #about .section-header h2 { color: var(--cream); }
+  #about .section-header p { color: rgba(250,247,242,0.65); }
+
+  .pillars-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 2rem; max-width: 1100px; margin: 0 auto;
+  }
+
+  .pillar {
+    padding: 1.75rem;
+    border: 1px solid rgba(250,247,242,0.12);
+    border-radius: 1.25rem;
+    transition: border-color 0.25s;
+  }
+
+  .pillar:hover { border-color: var(--gold); }
+
+  .pillar-icon { font-size: 2rem; margin-bottom: 1rem; }
+
+  .pillar h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem; font-weight: 700;
+    color: var(--cream); margin-bottom: 0.5rem;
+  }
+
+  .pillar p { color: rgba(250,247,242,0.6); font-size: 0.875rem; font-weight: 300; }
+
+  /* ── TESTIMONIALS ── */
+  #reviews {
+    padding: 6rem 4vw;
+    background: var(--blush-pale);
+  }
+
+  .reviews-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem; max-width: 1100px; margin: 0 auto;
+  }
+
+  .review-card {
+    background: white; border-radius: 1.25rem;
+    padding: 1.75rem;
+    border: 1px solid var(--border);
+  }
+
+  .stars { color: var(--gold); font-size: 1rem; letter-spacing: 2px; margin-bottom: 1rem; }
+
+  .review-card p {
+    color: var(--bark); font-size: 0.925rem;
+    font-style: italic; font-family: 'Playfair Display', serif;
+    margin-bottom: 1.25rem; line-height: 1.6;
+  }
+
+  .reviewer { display: flex; align-items: center; gap: 0.75rem; }
+
+  .reviewer-avatar {
+    width: 40px; height: 40px; border-radius: 50%;
+    background: var(--sage-pale);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.25rem;
+  }
+
+  .reviewer-name { font-weight: 500; font-size: 0.875rem; color: var(--bark); }
+  .reviewer-pet { font-size: 0.78rem; color: var(--muted); }
+
+  /* ── CONTACT ── */
+  #contact {
+    padding: 6rem 4vw;
+    background: var(--warm-white);
+  }
+
+  .contact-inner {
+    max-width: 780px; margin: 0 auto; text-align: center;
+  }
+
+  .contact-inner h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 3vw, 2.6rem);
+    font-weight: 700; color: var(--bark); margin-bottom: 1rem;
+  }
+
+  .contact-inner p { color: var(--muted); font-weight: 300; margin-bottom: 1.5rem; }
+
+  .walkies-cta-btn {
+    display: inline-flex; align-items: center; gap: 0.6rem;
+    background: var(--bark); color: var(--cream);
+    padding: 0.9rem 2.25rem; border-radius: 2rem;
+    text-decoration: none; font-weight: 500; font-size: 1rem;
+    letter-spacing: 0.02em; margin-bottom: 2.5rem;
+    transition: background 0.2s, transform 0.2s;
+  }
+  .walkies-cta-btn:hover { background: var(--bark-mid); transform: translateY(-2px); }
+  .walkies-cta-btn .walkies-logo {
+    background: white; color: var(--bark);
+    font-size: 0.7rem; font-weight: 700; letter-spacing: 0.06em;
+    padding: 0.2rem 0.5rem; border-radius: 0.4rem;
+  }
+
+  .walkies-embed-wrap {
+    border-radius: 1.5rem;
+    overflow: hidden;
+    border: 1px solid var(--border);
+    box-shadow: 0 8px 40px rgba(61,43,26,0.08);
+    background: white;
+  }
+
+  .walkies-embed-wrap iframe {
+    width: 100%; height: 700px;
+    border: none; display: block;
+  }
+
+  .walkies-fallback {
+    padding: 3rem 2rem;
+    text-align: center;
+    color: var(--muted);
+    font-size: 0.9rem;
+  }
+  .walkies-fallback a { color: var(--bark); font-weight: 500; }
+
+  /* ── HIATUS BANNER ── */
+  .hiatus-banner {
+    background: var(--gold); color: white;
+    text-align: center; padding: 0.6rem 1rem;
+    font-size: 0.82rem; font-weight: 500;
+    letter-spacing: 0.04em;
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--bark);
+    color: rgba(250,247,242,0.55);
+    text-align: center;
+    padding: 2.5rem 4vw;
+    font-size: 0.85rem;
+  }
+
+  footer .footer-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5rem; font-style: italic;
+    color: var(--cream); margin-bottom: 0.75rem; display: block;
+  }
+
+  footer .footer-logo span { color: var(--gold); font-style: normal; }
+
+  .footer-links { display: flex; justify-content: center; gap: 1.5rem; margin: 1rem 0; flex-wrap: wrap; }
+  .footer-links a { color: rgba(250,247,242,0.5); text-decoration: none; transition: color 0.2s; font-size: 0.82rem; }
+  .footer-links a:hover { color: var(--cream); }
+
+  @media (max-width: 768px) {
+    .hero { grid-template-columns: 1fr; padding-top: 7rem; }
+    .hero-visual { display: none; }
+    .form-row { grid-template-columns: 1fr; }
+    .nav-links { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Hiatus Banner -->
+<div class="hiatus-banner">
+  🌏 Currently on a short hiatus — back and better than ever mid-July 2026! Bookings opening soon.
+</div>
+
+<!-- Nav -->
+<nav>
+  <a href="#" class="nav-logo">All The <span>Paws</span></a>
+  <ul class="nav-links">
+    <li><a href="#services">Services</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#reviews">Reviews</a></li>
+    <li><a href="#contact" class="nav-cta">Book Now</a></li>
+  </ul>
+</nav>
+
+<!-- Hero -->
+<section class="hero">
+  <div class="hero-content">
+    <div class="hero-eyebrow">🐾 NJ's Trusted Pet Services</div>
+    <h1>Your pet deserves<br /><em>all the love.</em></h1>
+    <p class="hero-desc">
+      Professional, caring pet services tailored to every tail, snout, and feather. We treat your fur family like our own.
+    </p>
+    <div class="hero-actions">
+      <a href="#contact" class="btn-primary">Book a Session</a>
+      <a href="#services" class="btn-ghost">See Services</a>
+    </div>
+  </div>
+
+  <div class="hero-visual">
+    <div class="hero-blob">🐾</div>
+    <div class="hero-badge">
+      <span class="badge-icon">⭐</span>
+      <div class="badge-text">
+        <strong>5-Star Rated</strong>
+        <span>100+ happy clients</span>
+      </div>
+    </div>
+    <div class="hero-badge2">
+      🐶 &nbsp;<strong style="color:var(--bark); font-size:0.82rem;">Fully Insured &amp; Bonded</strong>
+    </div>
+  </div>
+</section>
+
+<!-- Services -->
+<section id="services">
+  <div class="section-header">
+    <span class="section-tag">What We Offer</span>
+    <h2>Services made with<br /><em>love at every step</em></h2>
+    <p>From daily walks to overnight stays — we've got everything your pet needs.</p>
+  </div>
+
+  <div class="services-grid">
+    <div class="service-card">
+      <span class="service-emoji">🦮</span>
+      <h3>Dog Walking</h3>
+      <p>Solo and group walks tailored to your pup's energy level and pace. GPS-tracked every time.</p>
+      <span class="service-price">From $20 / walk</span>
+    </div>
+
+    <div class="service-card">
+      <span class="service-emoji">🏠</span>
+      <h3>Pet Sitting</h3>
+      <p>In-home visits so your pet stays comfortable in their own space while you're away.</p>
+      <span class="service-price">From $25 / visit</span>
+    </div>
+
+    <div class="service-card">
+      <span class="service-emoji">🌙</span>
+      <h3>Overnight Boarding</h3>
+      <p>Your pet spends the night in a safe, cozy environment — like a sleepover with a best friend.</p>
+      <span class="service-price">From $65 / night</span>
+    </div>
+
+    <div class="service-card">
+      <span class="service-emoji">🛁</span>
+      <h3>Grooming</h3>
+      <p>Bath, brush, trim, and pamper. We make sure your pet looks and feels their absolute best.</p>
+      <span class="service-price">From $45 / session</span>
+    </div>
+
+    <div class="service-card">
+      <span class="service-emoji">🚗</span>
+      <h3>Pet Taxi</h3>
+      <p>Vet appointments, grooming trips, or daycare runs — we'll get your pet there safely.</p>
+      <span class="service-price">From $15 / trip</span>
+    </div>
+
+    <div class="service-card">
+      <span class="service-emoji">🐱</span>
+      <h3>Cat Care</h3>
+      <p>Daily feedings, litter care, playtime, and cuddles for your independent feline companion.</p>
+      <span class="service-price">From $18 / visit</span>
+    </div>
+  </div>
+</section>
+
+<!-- About / Pillars -->
+<section id="about">
+  <div class="section-header">
+    <span class="section-tag">Why All The Paws</span>
+    <h2>More than a service —<br /><em>a second family</em></h2>
+    <p>We put your pet's comfort, safety, and happiness above everything else.</p>
+  </div>
+
+  <div class="pillars-grid">
+    <div class="pillar">
+      <div class="pillar-icon">📍</div>
+      <h3>GPS-Tracked Walks</h3>
+      <p>Every walk is tracked and shared with you in real time. Peace of mind, always.</p>
+    </div>
+    <div class="pillar">
+      <div class="pillar-icon">📸</div>
+      <h3>Photo Updates</h3>
+      <p>Cute photos and check-ins sent throughout each visit so you never miss a moment.</p>
+    </div>
+    <div class="pillar">
+      <div class="pillar-icon">🛡️</div>
+      <h3>Insured &amp; Bonded</h3>
+      <p>Fully insured for your protection. Your pet is in responsible, trustworthy hands.</p>
+    </div>
+    <div class="pillar">
+      <div class="pillar-icon">❤️</div>
+      <h3>Genuine Care</h3>
+      <p>We treat every pet like they're our own. No rush, no shortcuts — just real love.</p>
+    </div>
+  </div>
+</section>
+
+<!-- Reviews -->
+<section id="reviews">
+  <div class="section-header">
+    <span class="section-tag">Happy Clients</span>
+    <h2>Tails are <em>wagging</em><br />all over NJ</h2>
+    <p>Don't just take our word for it — here's what pet parents are saying.</p>
+  </div>
+
+  <div class="reviews-grid">
+    <div class="review-card">
+      <div class="stars">★★★★★</div>
+      <p>"My dog Max literally sprints to the door when he sees her coming. Best decision we ever made for him."</p>
+      <div class="reviewer">
+        <div class="reviewer-avatar">🐕</div>
+        <div>
+          <div class="reviewer-name">Jamie L.</div>
+          <div class="reviewer-pet">Max, Golden Retriever</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="review-card">
+      <div class="stars">★★★★★</div>
+      <p>"She sent us photos every hour during our vacation. We felt completely at ease the entire trip."</p>
+      <div class="reviewer">
+        <div class="reviewer-avatar">🐈</div>
+        <div>
+          <div class="reviewer-name">Priya &amp; Dev M.</div>
+          <div class="reviewer-pet">Luna, Tabby Cat</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="review-card">
+      <div class="stars">★★★★★</div>
+      <p>"Our senior dog needs extra patience and care — she gets it every single visit. So grateful."</p>
+      <div class="reviewer">
+        <div class="reviewer-avatar">🦴</div>
+        <div>
+          <div class="reviewer-name">Marcus T.</div>
+          <div class="reviewer-pet">Bella, 12-year-old Lab mix</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Contact / Book -->
+<section id="contact">
+  <div class="contact-inner">
+    <h2>Book a visit 🐾</h2>
+    <p>Book directly through Walkies — real-time availability, instant confirmation, GPS tracking, and photo updates all in one place.</p>
+
+    <a href="https://walkies.app/profile/allthepawsco" target="_blank" rel="noopener" class="walkies-cta-btn">
+      <span class="walkies-logo">WALKIES</span>
+      Open booking page ↗
+    </a>
+
+    <div class="walkies-embed-wrap">
+      <iframe
+        src="https://walkies.app/profile/allthepawsco"
+        title="Book with All The Paws on Walkies"
+        loading="lazy"
+        allow="payment"
+      ></iframe>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer>
+  <span class="footer-logo">All The <span>Paws</span></span>
+  <div class="footer-links">
+    <a href="#services">Services</a>
+    <a href="#about">About</a>
+    <a href="#reviews">Reviews</a>
+    <a href="#contact">Contact</a>
+  </div>
+  <p>© 2026 All The Paws · New Jersey · Made with 🐾 and a lot of love</p>
+</footer>
+
+<script>
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function(e) {
+      const target = document.querySelector(this.getAttribute('href'));
+      if (target) {
+        e.preventDefault();
+        target.scrollIntoView({ behavior: 'smooth' });
+      }
+    });
+  });
+</script>
+
+</body>
+</html>
